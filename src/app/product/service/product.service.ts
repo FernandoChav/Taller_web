@@ -22,7 +22,7 @@ export class ProductService implements ObjectService<Product> {
     }
 
     all(): Observable<EntityGroup<Product>> {
-            return this.http.get<EntityGroup<Product>>(`0${this.baseUrl}all`);
+            return this.http.get<EntityGroup<Product>>(`${this.baseUrl}all`);
     }
     
     query(parameters: ObjectParameters): Observable<EntityGroup<Product>> {
