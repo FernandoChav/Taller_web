@@ -1,6 +1,6 @@
 import { HttpHeaders } from "@angular/common/http";
 
-export class HeaderUtil {
+export class HttpHeaderUtil {
 
     private constructor() {}
 

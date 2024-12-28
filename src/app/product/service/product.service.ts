@@ -4,14 +4,14 @@ import { Observable } from "rxjs";
 import { Product } from "../interface/product";
 import { EntityGroup } from "../../entities/entity.group";
 import { enviroment } from "../../../enviroment";
-import { ObjectService } from "../../service/object.service";
 import { UrlUtil } from "../../util/url.util";
 import { ObjectParameters } from "../../entities/object.parameters";
+import { HttpObjectService } from "../../service/object.service";
 
 @Injectable({
     providedIn: 'root'
 })
-export class ProductService implements ObjectService<Product> {
+export class ProductService implements HttpObjectService<Product> {
 
 
     private readonly baseUrl : string;

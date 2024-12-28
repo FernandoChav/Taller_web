@@ -1,5 +1,6 @@
-interface User {
+export interface User {
 
+    id : number;
     rut : string;
     name : string;
     birthdate : string;
