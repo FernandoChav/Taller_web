@@ -1,8 +1,4 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { ProductViewComponent } from '../product-view/product-view.component';
-import { EntityGroup } from '../../../entities/entity.group';
-import { Product } from '../../interface/product';
-import { Paginable } from '../../../util/paginable';
 import { ProductService } from '../../service/product.service';
 import { ObjectParameters } from '../../../entities/object.parameters';
 import { ProductController } from '../../controller/product.controller';
@@ -32,8 +28,7 @@ export class ProductViewInteractionsComponent {
   
     private update() {
       this.productService.query(
-        ObjectParameters.newParameters()
-        .page(this.controller.page)
+          this.controller.parameters()
       ).forEach(promise => {
         this.controller.group = promise;
       });
@@ -47,6 +42,26 @@ export class ProductViewInteractionsComponent {
     previousPage(): void {
       this.controller.page--;
       this.update();
+    }
+
+    order(asceding : boolean) {
+      console.log("Ordenando por precio, ascendente = " + asceding);
+      this.controller.isOrderingByPrice = true;
+      this.controller.isAscending = asceding;
+      this.update();
+    }
+
+    onSearch(event : Event) {
+        this.controller.resetPage();
+
+        const input = event.target as HTMLInputElement; 
+        this.controller.searchedProduct = input.value;
+
+        this.productService.query(
+          this.controller.parameters()
+        ).forEach(next => {
+          this.controller.group = next;
+        });
     }
 
 }
