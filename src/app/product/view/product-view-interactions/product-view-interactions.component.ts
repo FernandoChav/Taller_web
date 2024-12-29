@@ -45,7 +45,6 @@ export class ProductViewInteractionsComponent {
     }
 
     order(asceding : boolean) {
-      console.log("Ordenando por precio, ascendente = " + asceding);
       this.controller.isOrderingByPrice = true;
       this.controller.isAscending = asceding;
       this.update();
