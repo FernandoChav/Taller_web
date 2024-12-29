@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Product } from "../interface/product";
@@ -19,6 +19,9 @@ export class ProductService implements HttpObjectService<Product> {
 
     constructor(private http : HttpClient) {
         this.baseUrl = enviroment.apiUrl + this.endpointService;
+    }
+    update(id: number, parameters: ObjectParameters, headers_: HttpHeaders): Observable<Product> {
+        throw new Error("Method not implemented.");
     }
 
     all(): Observable<EntityGroup<Product>> {
