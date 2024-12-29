@@ -19,6 +19,9 @@ export class UserService implements HttpObjectService<User> {
     constructor(private http : HttpClient){
         this.baseUrl = enviroment.apiUrl + this.endpointService;
     }
+    update(id: number, parameters: ObjectParameters, headers_: HttpHeaders): Observable<User> {
+        throw new Error("Method not implemented.");
+    }
 
     all(headers?: HttpHeaders): Observable<EntityGroup<User>> {
         if(headers == null) {

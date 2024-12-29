@@ -30,8 +30,4 @@ export class UserViewComponent implements OnInit {
     });
   }
 
-  onSearch(event : Event) {
-    
-  }
-
 }

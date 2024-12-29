@@ -10,4 +10,10 @@ export interface HttpObjectService<T> {
     query(parameters : ObjectParameters,
         headers? : HttpHeaders) : Observable<EntityGroup<T>>
 
+
+    update(id : number,
+        parameters : ObjectParameters,
+        headers_ : HttpHeaders
+    ) : Observable<T>
+
 }

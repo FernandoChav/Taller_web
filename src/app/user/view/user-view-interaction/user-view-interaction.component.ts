@@ -16,12 +16,22 @@ export class UserViewInteractionComponent {
     private userService : UserService
   ) {}
 
-  nextPage() {
+  update() {
+    this.userService.query(
+      this.controller.parameters(), HttpHeaderUtil.asBearToken("token")
+  ).forEach(next => {
+    this.controller.group = next;
+  }, );
+  }
 
+  nextPage() {
+      this.controller.page++;
+      this.update();
   }
 
   previousPage() {
-
+      this.controller.page--;
+      this.update();
   }
 
   onSearch(event : Event) {
@@ -29,15 +39,7 @@ export class UserViewInteractionComponent {
       
       const input = event.target as HTMLInputElement; 
       this.controller.searchByName = input.value;
-
-      console.log("HOLA");
-
-      this.userService.query(
-          this.controller.parameters(), HttpHeaderUtil.asBearToken("token")
-      ).forEach(next => {
-        console.log("QUERYY");
-        this.controller.group = next;
-      }, );
+      this.update();
   }
 
 }

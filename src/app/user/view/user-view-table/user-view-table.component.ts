@@ -27,4 +27,21 @@ export class UserViewTableComponent {
       return this.numberAsGender.get(genderAsNumber);
   }
 
+  public getMessageSwitchVisibility(isActive : boolean) {
+    return isActive ? "Desactivar " : "Activar";
+  }
+
+  public switchVisibility(id : number) {
+    var status = false;
+
+    this.controller.group
+    ?.entities.forEach(user => {
+      if(user.id == id){
+        console.log("UPDATING");
+        status = !user.isActive;
+        user.isActive = status;
+      }
+    });
+  }
+
 }

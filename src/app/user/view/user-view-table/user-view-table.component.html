@@ -21,9 +21,6 @@
             </th>
             <th scope="col" class="px-1 py-1  sm:px-2 sm:py-3">
             </th>
-            <th scope="col" class="px-1 py-1  sm:px-2 sm:py-3">
-                
-            </th>
         </tr>
     </thead>
     <tbody>
@@ -46,11 +43,8 @@
             <td class="text-sm sm:text-base px-1 py-1 sm:px-3 sm:py-2">
                 {{ translateIsActive(user.isActive) }}
             </td>
-            <td class="text-base px-1 py-1 sm:px-3 sm:py-2">
-           
-            </td>
             <td class="text-base px-2 py-2 text-center">
-      
+                <a class="text-sky-500" (click) = "switchVisibility(user.id)" href="#"> {{ getMessageSwitchVisibility(user.isActive) }} </a>
             </td>
         </tr>
         
