@@ -20,18 +20,14 @@ export class UserService implements HttpObjectService<User> {
         this.baseUrl = enviroment.apiUrl + this.endpointService;
     }
     
-    update(id: number, parameters: ObjectParameters, headers_: HttpHeaders): Observable<User> {
-        throw new Error("Method not implemented.");
-    }
-
-    all(headers?: HttpHeaders): Observable<EntityGroup<User>> {
+    public all(headers?: HttpHeaders): Observable<EntityGroup<User>> {
         if(headers == null) {
             return EMPTY;
         }
         return this.http.get<EntityGroup<User>>(`${this.baseUrl}all`, { headers : headers});
     }
 
-    query(parameters: ObjectParameters, headers?: HttpHeaders): Observable<EntityGroup<User>> {
+    public query(parameters: ObjectParameters, headers?: HttpHeaders): Observable<EntityGroup<User>> {
         if(headers == null){
             return EMPTY;
         }
@@ -42,5 +38,19 @@ export class UserService implements HttpObjectService<User> {
         return this.http.get<EntityGroup<User>>(url, {headers : headers});
     }
 
+    public update(id: number, parameters: ObjectParameters, headers: HttpHeaders): Observable<User> {
+        if(parameters == null){
+            return EMPTY;
+        }
+
+        var url = `${this.baseUrl}update/${id}`;
+
+        var dictionary = parameters.getParameters();
+        var body = Object.fromEntries(dictionary);
+
+        console.log(url);
+        console.log(body);
+        return this.http.put<User>(url, body, {headers : headers})
+    }
 
 }

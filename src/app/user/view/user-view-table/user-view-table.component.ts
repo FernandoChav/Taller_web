@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { UserController } from '../controller/user.controller';
 import { NgFor } from '@angular/common';
+import { UserService } from '../../service/user.service';
+import { HttpHeaderUtil } from '../../../util/http.header.util';
+import { ObjectParameters } from '../../../entities/object.parameters';
 
 @Component({
   selector: 'app-user-view-table',
@@ -16,7 +19,9 @@ export class UserViewTableComponent {
   .set(2, "Prefiero no decirlo")
   .set(3, "Otro");
 
-  public constructor(public controller : UserController) {
+  public constructor(public controller : UserController,
+    private userService : UserService
+  ) {
   }
 
   public translateIsActive(isActive : boolean) : string {
@@ -28,7 +33,7 @@ export class UserViewTableComponent {
   }
 
   public getMessageSwitchVisibility(isActive : boolean) {
-    return isActive ? "Desactivar " : "Activar";
+    return isActive ? "Desactivar" : "Activar";
   }
 
   public switchVisibility(id : number) {
@@ -37,10 +42,17 @@ export class UserViewTableComponent {
     this.controller.group
     ?.entities.forEach(user => {
       if(user.id == id){
-        console.log("UPDATING");
+
+        console.log("ENCONTRADO, TIENE STATUS = " + user.isActive);
         status = !user.isActive;
         user.isActive = status;
       }
+    });
+
+    this.userService.update(id, ObjectParameters.newParameters()
+    .add("IsActive", status + ""), HttpHeaderUtil.asBearToken("to"))
+    .forEach(user => {
+        console.log("USER = " + user);
     });
   }
 
