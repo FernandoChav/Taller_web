@@ -24,7 +24,7 @@ export class ProductViewInteractionsComponent {
 
    reset(): void {
       this.controller.page = 0;
-    }
+  }
   
     private update() {
       this.productService.query(
@@ -45,7 +45,6 @@ export class ProductViewInteractionsComponent {
     }
 
     order(asceding : boolean) {
-      console.log("Ordenando por precio, ascendente = " + asceding);
       this.controller.isOrderingByPrice = true;
       this.controller.isAscending = asceding;
       this.update();

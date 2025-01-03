@@ -3,11 +3,13 @@ import { EntityGroup } from "../../entities/entity.group";
 import { Product } from "../interface/product";
 import { ObjectParameters } from "../../entities/object.parameters";
 import { Paginable } from "../../util/paginable";
+import { EntityServiceShared } from "../../service/entity.service.shared";
+import { ProductService } from "../service/product.service";
 
 @Injectable({
     providedIn: 'root'
 })
-export class ProductController implements Paginable {
+export class ProductController implements EntityServiceShared<Product> {
 
     page : number = 1;
     searchedProduct : string = "";
