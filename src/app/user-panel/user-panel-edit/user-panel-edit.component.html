@@ -1,0 +1,44 @@
+<main class="px-32 py-8">
+    <h2 class="text-3xl mb-2">Edición de usuario</h2>
+    <hr class="mb-8">
+    <form>
+        <div class="flex mb-8">
+            <div class="flex flex-col mr-24 w-1/2">
+                <label for="name" class="text-normal">Nombre</label>
+                <input type="text" class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300" id="name">
+            </div>
+            <div class="flex flex-col w-1/2">
+                <label for="rut" class="text-normal">Rut</label>
+                <input class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300 " type="text" id="name" disabled placeholder="21544970-K">
+            </div>
+        </div>
+        <div class="flex mb-8">
+            <div class="flex flex-col mr-24 w-1/2">
+                <label for="name" class="text-normal">Fecha de nacimiento</label>
+                <input type="date" class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300" id="birthdate">
+            </div>
+            <div class="flex flex-col w-1/2">
+                <label for="rut" class="text-normal">Género</label>
+                <select class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300 " type="text" id="gender">
+                    <option value="masculino">Masculino</option>
+                    <option value="masculino">Femenino</option>
+                    <option value="masculino">Otro</option>
+                    <option value="masculino">Prefiero no decirlo</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex mb-8">
+            <div class="flex flex-col mr-24 w-1/2">
+                <label for="name" class="text-normal">Identificador</label>
+                <input type="text" class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300" id="id" placeholder="1" disabled>
+            </div>
+            <div class="flex flex-col w-1/2">
+                <label for="rut" class="text-normal">Cuenta Activa</label>
+                <input class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300 " type="text" id="isActive" disabled placeholder="Activo">
+            </div>
+        </div>
+        <div class="mt-8">
+            <button class="border py-3 px-2 rounded-lg w-full text-normal border-sky-600 bg-sky-600 text-white hover:border-sky-500 hover:bg-sky-500">Actualizar</button>
+        </div> 
+    </form>
+</main>
