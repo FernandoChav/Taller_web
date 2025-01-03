@@ -24,7 +24,7 @@ export class ProductViewInteractionsComponent {
 
    reset(): void {
       this.controller.page = 0;
-    }
+  }
   
     private update() {
       this.productService.query(
