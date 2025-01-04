@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { EMPTY, Observable } from "rxjs";
 import { Product } from "../interface/product";
 import { EntityGroup } from "../../entities/entity.group";
 import { enviroment } from "../../../enviroment";
@@ -20,9 +20,41 @@ export class ProductService implements HttpObjectService<Product> {
     constructor(private http : HttpClient) {
         this.baseUrl = enviroment.apiUrl + this.endpointService;
     }
+
+
+    post(name : string, price : string, stock : string, type : string, image : File, headers? : HttpHeaders
+    ) : Observable<Product> {
+        
+        var url = `${this.baseUrl}create`;
+
+        var formData = new FormData();
+        formData.append("creationProduct.Ename", name);
+        formData.append("image", image);
+        formData.append("creationProduct.Price",  price.toString());
+        formData.append("creationProduct.Stock", stock.toString());
+        formData.append("creationProduct.ProductType", type.toString());
+
+        console.log(formData);
+
+        return this.http.post<Product>(url, formData);
+
+    }
+
+    create(entity: Product, headers? : HttpHeaders): Observable<Product> {
+        var url = `${this.baseUrl}create`;
+        return this.http.post<Product>(url, entity, {headers : headers});
+    }
     
     update(id: number, parameters: ObjectParameters, headers_: HttpHeaders): Observable<Product> {
-        throw new Error("Method not implemented.");
+        if(parameters == null){
+            return EMPTY;
+        }
+
+        var url = `${this.baseUrl}update/${id}`;
+
+        var dictionary = parameters.getParameters();
+        var body = Object.fromEntries(dictionary);
+        return this.http.put<Product>(url, body, {headers : headers_});
     }
 
     all(): Observable<EntityGroup<Product>> {
@@ -37,6 +69,9 @@ export class ProductService implements HttpObjectService<Product> {
         return this.http.get<EntityGroup<Product>>(url);
     }
     
-
+    delete(id: number): Observable<Product> {
+        var url = `${this.baseUrl}delete/${id}`;
+        return this.http.delete<Product>(url);
+    }
 
 }

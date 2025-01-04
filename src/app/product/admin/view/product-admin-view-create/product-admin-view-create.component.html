@@ -1,0 +1,71 @@
+<main class="w-full sm:w-1/4">
+    <h2 class="text-3xl mb-2">Crear Producto</h2>
+    <hr class="mb-8">
+
+    <form [formGroup] = "forms" (ngSubmit) = "onSubmit()">
+        <div class="flex mb-8">
+            <div class="flex flex-col mr-24 w-1/2">
+                <label for="name" class="text-normal">Nombre Producto</label>
+                <input type="text" class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300" id="name" formControlName="productName">
+
+                <div *ngIf="productName()?.invalid">
+                    <p *ngIf="productName()?.errors?.['required']" class="text-red-500 text-sm">Este campo es obligatorio.</p>
+                    <p *ngIf="productName()?.errors?.['minlength']" class="text-red-500 text-sm">Este campo debe tener minímo 10 caracteres.</p>
+                    <p *ngIf="productName()?.errors?.['maxlength']" class="text-red-500 text-sm">Este campo debe tener minímo 64 caracteres.</p>
+                </div>
+
+            </div>
+            <div class="flex flex-col w-1/2">
+                <label for="stock" class="text-normal">Stock</label>
+                <input class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300 " type="text" id="stock" placeholder="" formControlName="stock">
+
+                <div *ngIf="stock()?.invalid">
+                    <p *ngIf="stock()?.errors?.['required']" class="text-red-500 text-sm">Este campo es obligatorio.</p>
+                    <p *ngIf="stock()?.errors?.['pattern']" class="text-red-500 text-sm">Este campo debe ser númerico.</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="flex mb-8">
+            <div class="flex flex-col mr-24 w-1/2">
+                <label for="name" class="text-normal">Precio</label>
+                <input type="text" class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300" id="price" formControlName="price">
+
+                <div *ngIf="price()?.invalid">
+                    <p *ngIf="price()?.errors?.['required']" class="text-red-500 text-sm">Este campo es obligatorio.</p>
+                    <p *ngIf="price()?.errors?.['pattern']" class="text-red-500 text-sm">Este campo debe ser númerico.</p>
+                </div>
+
+            </div>
+            <div class="flex flex-col w-1/2">
+                <label for="rut" class="text-normal">Tipo Producto</label>
+                <select class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300 " type="text" id="product-type" formControlName="typeProduct">
+                    <option value="polera">Polera</option>
+                    <option value="gorro">Gorro</option>
+                    <option value="juguetería">Juguetería</option>
+                    <option value="alimentación">Alimentación</option>
+                    <option value="libro">Libro</option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-8">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Subir una imagen</label>
+            <input formControlName="file" (change)="onFileChange($event)" accept=".jpg,.png" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+        </div>
+
+        <div class="mt-8">
+            <button class="border py-3 px-2 rounded-lg w-full text-normal border-sky-600 bg-sky-600 text-white hover:border-sky-500 hover:bg-sky-500">  
+                Actualizar
+            </button>
+        </div> 
+    </form>
+
+    <div *ngIf="productAdded" class="mt-8 border rounded-sm px-2 py-2 bg-green-400">
+        <p class="text-xl text-center text-white"> Producto agregado correctamente :) </p>
+    </div>
+
+    <div *ngIf="productFailedTryingAdd" class="mt-8 border rounded-sm px-2 py-2 bg-red-400">
+        <p class="text-xl text-center text-white"> Error agregando el producto :( </p>
+    </div>
+
+</main>

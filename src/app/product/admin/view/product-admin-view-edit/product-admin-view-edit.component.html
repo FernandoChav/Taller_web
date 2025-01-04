@@ -1,0 +1,59 @@
+<main class="w-1/4">
+    <h2 class="text-3xl mb-2">Edición de usuario : {{ userId }}</h2>
+    <hr class="mb-8">
+
+    <form [formGroup] = "forms" (ngSubmit) = "onSubmit()">
+        <div class="flex mb-8">
+            <div class="flex flex-col mr-24 w-1/2">
+                <label for="name" class="text-normal">Nombre Producto</label>
+                <input type="text" class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300" id="name" formControlName="productName">
+
+                <div *ngIf="productName()?.invalid">
+                    <p class="text-red-500  text-sm">El nombre debe ser (10, 64)</p>
+                </div>
+
+            </div>
+            <div class="flex flex-col w-1/2">
+                <label for="stock" class="text-normal">Stock</label>
+                <input class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300 " type="text" id="stock" placeholder="" formControlName="stock">
+
+                <div *ngIf="stock()?.invalid">
+                    <p class="text-red-500  text-sm">Debe ser un número positivo</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="flex mb-8">
+            <div class="flex flex-col mr-24 w-1/2">
+                <label for="name" class="text-normal">Precio</label>
+                <input type="text" class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300" id="price" formControlName="price">
+
+                <div *ngIf="price()?.invalid">
+                    <p class="text-red-500  text-sm">Debe ser un número positivo</p>
+                </div>
+
+            </div>
+            <div class="flex flex-col w-1/2">
+                <label for="rut" class="text-normal">Tipo Producto</label>
+                <select class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300 " type="text" id="product-type" formControlName="typeProduct">
+                    <option value="polera">Polera</option>
+                    <option value="gorro">Gorro</option>
+                    <option value="juguetería">Juguetería</option>
+                    <option value="alimentación">Alimentación</option>
+                    <option value="libro">Libro</option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-8">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Subir una imagen</label>
+            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+        </div>
+
+        <div class="mt-8">
+            <button class="border py-3 px-2 rounded-lg w-full text-normal border-sky-600 bg-sky-600 text-white hover:border-sky-500 hover:bg-sky-500">  
+                Actualizar
+            </button>
+        </div> 
+    </form>
+
+</main>

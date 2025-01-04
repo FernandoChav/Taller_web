@@ -5,6 +5,8 @@ import { HttpHeaders } from "@angular/common/http";
 
 export interface HttpObjectService<T> {
 
+    create(entity : T, headers? : HttpHeaders) : Observable<T>
+
     all(headers? : HttpHeaders) : Observable<EntityGroup<T>>
 
     query(parameters : ObjectParameters,
@@ -15,5 +17,7 @@ export interface HttpObjectService<T> {
         parameters : ObjectParameters,
         headers_ : HttpHeaders
     ) : Observable<T>
+
+    delete(id : number) : Observable<T>;
 
 }
