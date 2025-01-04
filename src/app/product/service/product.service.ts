@@ -20,6 +20,7 @@ export class ProductService implements HttpObjectService<Product> {
     constructor(private http : HttpClient) {
         this.baseUrl = enviroment.apiUrl + this.endpointService;
     }
+    
     update(id: number, parameters: ObjectParameters, headers_: HttpHeaders): Observable<Product> {
         throw new Error("Method not implemented.");
     }
