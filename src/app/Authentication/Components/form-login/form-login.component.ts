@@ -48,7 +48,9 @@ export class FormLoginComponent {
       
       if (response.tokenContent) {
         this.storageService.setVar('token', response.tokenContent);
+        this.storageService.setVar('role', response.role.name);
         console.log('Login success', this.storageService.getVar('token'));
+
       } 
     } catch (error: any) {
       this.error = true;
