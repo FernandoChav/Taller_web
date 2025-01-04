@@ -6,6 +6,8 @@ import { ShoppingCartViewComponent } from './shopping-cart/shopping-cart-view/sh
 import { UserViewComponent } from './user/view/user-view/user-view.component';
 import { UserPanelViewComponent } from './user-panel/user-panel-view/user-panel-view.component';
 import { CommonModule } from '@angular/common';
+import { NotFoundViewComponent } from './not-found/view/not-found-view/not-found-view.component';
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, 
@@ -14,6 +16,7 @@ import { CommonModule } from '@angular/common';
     UserViewComponent, 
     UserPanelViewComponent,
     CommonModule
+    NotFoundViewComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
