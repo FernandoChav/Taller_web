@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
 import { AdminProductServiceShared } from '../../service/admin.product.service.shared';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-admin-view-interactions',
@@ -12,7 +13,8 @@ import { AdminProductServiceShared } from '../../service/admin.product.service.s
 export class ProductAdminViewInteractionsComponent {
 
   constructor(public serviceShared : AdminProductServiceShared,
-      public productService : ProductService) {}
+      public productService : ProductService,
+      private router: Router) {}
   
   onSearch(event : Event) {
     this.serviceShared.resetPage();
@@ -50,7 +52,7 @@ export class ProductAdminViewInteractionsComponent {
   }
 
   redirectCreateUser() {
-    
+    this.router.navigate(['/create-product']);
   }
 
 }

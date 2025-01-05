@@ -4,6 +4,9 @@ import { ProductService } from '../../../service/product.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { TypesUtil } from '../../../../util/types.util';
 import { HttpHeaderUtil } from '../../../../util/http.header.util';
+import { Router } from '@angular/router';
+import { NavbarComponent } from '../../../../Authentication/Components/navbar/navbar.component';
+import { FooterComponent } from '../../../../footer/footer.component';
 
 @Component({
   selector: 'app-product-admin-view-create',
@@ -11,6 +14,8 @@ import { HttpHeaderUtil } from '../../../../util/http.header.util';
   imports: [CommonModule,
       FormsModule,
       ReactiveFormsModule,
+      NavbarComponent,
+      FooterComponent,
     NgIf],
   templateUrl: './product-admin-view-create.component.html',
   styleUrl: './product-admin-view-create.component.css'
@@ -22,7 +27,8 @@ export class ProductAdminViewCreateComponent implements OnInit {
   productFailedTryingAdd : boolean = false;
 
   constructor(private formBuilder : FormBuilder, 
-    private productService : ProductService
+    private productService : ProductService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +39,7 @@ export class ProductAdminViewCreateComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input?.files?.length) {
       const file = input.files[0];
-      this.forms.patchValue({ file }); // Actualiza el control con el archivo seleccionado
+      this.forms.patchValue({ file }); 
     }
   }
 
@@ -97,7 +103,7 @@ export class ProductAdminViewCreateComponent implements OnInit {
         setTimeout(() => {
           this.productAdded = false;
           this.clear();
-          // redirect page
+          this.router.navigate(['/product-admin']);
         }, 5000);
       },
       error:  () => {

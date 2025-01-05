@@ -8,12 +8,14 @@ import { Paginable } from '../../../util/paginable';
 import { ObjectParameters } from '../../../entities/object.parameters';
 import { ProductController } from '../../controller/product.controller';
 import { NavbarComponent } from "../../../Authentication/Components/navbar/navbar.component";
+import { FooterComponent } from '../../../footer/footer.component';
 
 @Component({
   selector: 'app-product-view',
   standalone: true,
   imports: [ProductViewTableComponent,
-    ProductViewInteractionsComponent, NavbarComponent],
+    ProductViewInteractionsComponent, NavbarComponent,
+  FooterComponent],
   templateUrl: './product-view.component.html',
   styleUrl: './product-view.component.css'
 })
