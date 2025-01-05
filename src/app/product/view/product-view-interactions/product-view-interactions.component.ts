@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { ProductService } from '../../service/product.service';
 import { ObjectParameters } from '../../../entities/object.parameters';
 import { ProductController } from '../../controller/product.controller';
+import {ProductService} from '../../service/product.service';
 
 @Component({
   selector: 'app-product-view-interactions',
@@ -15,7 +15,7 @@ export class ProductViewInteractionsComponent {
   private readonly productService : ProductService;
   readonly controller : ProductController;
 
-  constructor(productService : ProductService, 
+  constructor(productService : ProductService,
     controller : ProductController
   ) {
     this.productService = productService;
@@ -25,7 +25,7 @@ export class ProductViewInteractionsComponent {
    reset(): void {
       this.controller.page = 0;
   }
-  
+
     private update() {
       this.productService.query(
           this.controller.parameters()
@@ -38,7 +38,7 @@ export class ProductViewInteractionsComponent {
       this.controller.page++;
       this.update();
     }
-  
+
     previousPage(): void {
       this.controller.page--;
       this.update();
@@ -53,7 +53,7 @@ export class ProductViewInteractionsComponent {
     onSearch(event : Event) {
         this.controller.resetPage();
 
-        const input = event.target as HTMLInputElement; 
+        const input = event.target as HTMLInputElement;
         this.controller.searchedProduct = input.value;
 
         this.productService.query(

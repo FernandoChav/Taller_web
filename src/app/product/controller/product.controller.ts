@@ -4,7 +4,6 @@ import { Product } from "../interface/product";
 import { ObjectParameters } from "../../entities/object.parameters";
 import { Paginable } from "../../util/paginable";
 import { EntityServiceShared } from "../../service/entity.service.shared";
-import { ProductService } from "../service/product.service";
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +15,7 @@ export class ProductController implements EntityServiceShared<Product> {
     group? : EntityGroup<Product> | null = null;
     isOrderingByPrice : boolean = false;
     isAscending : boolean = false;
-    
+
     public resetPage() : void {
         this.page = 1;
     }

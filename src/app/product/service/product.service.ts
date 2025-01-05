@@ -1,12 +1,12 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { EMPTY, Observable } from "rxjs";
-import { Product } from "../interface/product";
 import { EntityGroup } from "../../entities/entity.group";
 import { enviroment } from "../../../enviroment";
 import { UrlUtil } from "../../util/url.util";
 import { ObjectParameters } from "../../entities/object.parameters";
 import { HttpObjectService } from "../../service/object.service";
+import { Product } from "../interface/product";
 
 @Injectable({
     providedIn: 'root'
