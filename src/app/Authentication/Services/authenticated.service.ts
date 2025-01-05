@@ -3,15 +3,18 @@ import { inject, Injectable } from '@angular/core';
 
 import { ResponseAPI } from '../Interfaces/ResponseAPI';
 import { firstValueFrom } from 'rxjs';
+import { enviroment } from '../../../enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticatedService {
-  private baseUrl = 'http://localhost:5026';
+  private baseUrl = '';
   private http = inject(HttpClient);
 
-  constructor() { }
+  constructor() { 
+    this.baseUrl = enviroment.apiUrl;
+  }
 
 
   async login(form : any): Promise<ResponseAPI> {
