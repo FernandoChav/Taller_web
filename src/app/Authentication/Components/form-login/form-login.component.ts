@@ -14,6 +14,7 @@ import { LocalStorageService } from '../../Services/local-storage.service';
   styleUrl: './form-login.component.css'
 })
 export class FormLoginComponent {
+  router = inject(Router);
   form! : FormGroup;
   private authenticatedService = inject(AuthenticatedService);
   private storageService = inject(LocalStorageService);
@@ -26,8 +27,8 @@ export class FormLoginComponent {
   }
   formulario(){
     this.form = this.fb.group({
-      email: ['', Validators.required, Validators.email],
-      password: ['', Validators.required, Validators.minLength(6)] 
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]] 
     });
   }
 
@@ -36,24 +37,49 @@ export class FormLoginComponent {
   get passwordValidate() { return this.form.get('password')?.invalid && this.form.get('password')?.touched; }
 
   async login(){
+    console.log(this.form.invalid);
     if (this.form.invalid) {
        Object.values(this.form.controls).forEach(control => {
         control.markAsTouched();
       });
+      console.log(this.form.value);
+      console.log("Formulario invalido");
       return;
     }
     try {
+      console.log(this.form.value);
       const response = await this.authenticatedService.login(this.form.value);
-
+      
       
       if (response.tokenContent) {
         this.storageService.setVar('token', response.tokenContent);
-        console.log('Login success', this.storageService.getVar('token'));
+        this.storageService.setVar('role', response.role.name);
+        this.loginAlert = true;
+        this.error = false;
+        this.errorMesage = [];
+        this.errorMesage.push("Login exitoso");
+
+        // Retarda la redirección para que el usuario vea el mensaje
+        setTimeout(() => {
+          if (this.storageService.getVar('role') === 'Administrator') {
+            this.router.navigate(['user']);
+          } else {
+            this.router.navigate(['']);
+          }
+        }, 2000);
+
       } 
     } catch (error: any) {
-      this.error = true;
-      this.errorMesage.push(error);
-      console.log(error);
+      if (error.status === 400) {
+        this.error = true;
+        this.loginAlert = false;
+        this.errorMesage = [error.error.message]; // Mensaje específico del backend
+      } else {
+        // Si es un error no esperado, muestra un mensaje genérico
+        this.error = true;
+        this.loginAlert = false;
+        this.errorMesage = ["Error interno del servidor"];
+      }
     }
   }
 

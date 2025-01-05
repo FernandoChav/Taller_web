@@ -4,13 +4,13 @@ import { UserService } from '../../service/user.service';
 import { HttpHeaderUtil } from '../../../util/http.header.util';
 import { UserController } from '../controller/user.controller';
 import { UserViewInteractionComponent } from '../user-view-interaction/user-view-interaction.component';
+import { NavbarComponent } from "../../../Authentication/Components/navbar/navbar.component";
 
 @Component({
   selector: 'app-user-view',
   standalone: true,
   imports: [UserViewTableComponent,
-    UserViewInteractionComponent
-  ],
+    UserViewInteractionComponent, NavbarComponent],
   templateUrl: './user-view.component.html',
   styleUrl: './user-view.component.css'
 })

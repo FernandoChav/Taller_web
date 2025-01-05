@@ -7,13 +7,13 @@ import { Product } from '../../interface/product';
 import { Paginable } from '../../../util/paginable';
 import { ObjectParameters } from '../../../entities/object.parameters';
 import { ProductController } from '../../controller/product.controller';
+import { NavbarComponent } from "../../../Authentication/Components/navbar/navbar.component";
 
 @Component({
   selector: 'app-product-view',
   standalone: true,
-  imports: [ProductViewTableComponent, 
-    ProductViewInteractionsComponent
-    ],
+  imports: [ProductViewTableComponent,
+    ProductViewInteractionsComponent, NavbarComponent],
   templateUrl: './product-view.component.html',
   styleUrl: './product-view.component.css'
 })

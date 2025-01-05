@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { initFlowbite } from 'flowbite';
-import { ProductViewComponent } from './product/view/product-view/product-view.component';
+
 import { ShoppingCartViewComponent } from './shopping-cart/shopping-cart-view/shopping-cart-view.component';
 import { UserViewComponent } from './user/view/user-view/user-view.component';
 import { UserPanelViewComponent } from './user-panel/user-panel-view/user-panel-view.component';
@@ -14,17 +14,7 @@ import { PurchasingProcessViewComponent } from './purchasing-process/view/purcha
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, 
-    ProductViewComponent,
-    ShoppingCartViewComponent,
-    UserViewComponent, 
-    UserPanelViewComponent,
-    CommonModule,
-    NotFoundViewComponent,
-    ProductAdminViewComponent,
-    ProductAdminViewEditComponent,
-    ProductAdminViewCreateComponent,
-    PurchasingProcessViewComponent
+  imports: [RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
