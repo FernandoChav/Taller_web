@@ -7,6 +7,10 @@ import { UserViewComponent } from './user/view/user-view/user-view.component';
 import { UserPanelViewComponent } from './user-panel/user-panel-view/user-panel-view.component';
 import { CommonModule } from '@angular/common';
 import { NotFoundViewComponent } from './not-found/view/not-found-view/not-found-view.component';
+import { ProductAdminViewComponent } from './product/admin/view/product-admin-view/product-admin-view.component';
+import { ProductAdminViewEditComponent } from './product/admin/view/product-admin-view-edit/product-admin-view-edit.component';
+import { ProductAdminViewCreateComponent } from './product/admin/view/product-admin-view-create/product-admin-view-create.component';
+import { PurchasingProcessViewComponent } from './purchasing-process/view/purchasing-process-view/purchasing-process-view.component';
 
 @Component({
   selector: 'app-root',
