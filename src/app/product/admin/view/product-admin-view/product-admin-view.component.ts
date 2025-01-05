@@ -4,12 +4,14 @@ import { ProductService } from '../../../service/product.service';
 import { ObjectParameters } from '../../../../entities/object.parameters';
 import { ProductAdminViewTableComponent } from '../product-admin-view-table/product-admin-view-table.component';
 import { ProductAdminViewInteractionsComponent } from '../product-admin-view-interactions/product-admin-view-interactions.component';
+import { NavbarComponent } from '../../../../Authentication/Components/navbar/navbar.component';
 
 @Component({
   selector: 'app-product-admin-view',
   standalone: true,
   imports: [ProductAdminViewTableComponent,
-    ProductAdminViewInteractionsComponent
+    ProductAdminViewInteractionsComponent,
+    NavbarComponent
   ],
   templateUrl: './product-admin-view.component.html',
   styleUrl: './product-admin-view.component.css'

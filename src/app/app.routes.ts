@@ -24,6 +24,12 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: "product-admin",
+        loadComponent: () => import("../app/product/admin/view/product-admin-view/product-admin-view.component").then(m => m.ProductAdminViewComponent),
+        pathMatch: 'full',
+        canActivate: [authGuard]
+    },
+    {
         
         path: 'user',
         loadComponent : () => import('../app/user/view/user-view/user-view.component').then(m => m.UserViewComponent),

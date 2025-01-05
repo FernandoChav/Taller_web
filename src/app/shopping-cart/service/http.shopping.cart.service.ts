@@ -20,7 +20,11 @@ export class HttpShoppingCartService implements ShoppingCartService {
 
     get(): Observable<CartItem[]> {
         console.log(`${this.baseUrl}get`);
-        return this.httpClient.get<CartItem[]>(`${this.baseUrl}get`);
+        return this.httpClient.get<CartItem[]>(`${this.baseUrl}get`,
+            {withCredentials : true, headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })}
+        );
     }
 
     addToCart(item: CartItem): Observable<CartItem[]> {

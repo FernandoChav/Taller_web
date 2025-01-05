@@ -19,7 +19,7 @@ export class AuthenticatedService {
 
   async login(form : any): Promise<ResponseAPI> {
     try {
-      const response = await  firstValueFrom(this.http.post<ResponseAPI>(`${this.baseUrl}/api/authenticate`, form));
+      const response = await  firstValueFrom(this.http.post<ResponseAPI>(`${this.baseUrl}api/authenticate`, form));
       return Promise.resolve(response);
     }
     catch (error) {

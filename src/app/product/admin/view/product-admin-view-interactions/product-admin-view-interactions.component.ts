@@ -25,9 +25,6 @@ export class ProductAdminViewInteractionsComponent {
     ).forEach(next => {
       this.serviceShared.group = next;
     });
-
-
-    
   }
 
   reset(): void {
@@ -50,6 +47,10 @@ export class ProductAdminViewInteractionsComponent {
   previousPage(): void {
     this.serviceShared.page--;
     this.update();
+  }
+
+  redirectCreateUser() {
+    
   }
 
 }
