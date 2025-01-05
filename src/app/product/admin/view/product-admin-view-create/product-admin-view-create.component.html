@@ -1,5 +1,6 @@
-<main class="w-full sm:w-1/4">
-    <h2 class="text-3xl mb-2">Crear Producto</h2>
+<main class="w-full px-4 py-4 sm:flex sm:items-center sm:justify-center sm:py-20 ">
+    <article>
+        <h2 class="text-3xl mb-2">Crear Producto</h2>
     <hr class="mb-8">
 
     <form [formGroup] = "forms" (ngSubmit) = "onSubmit()">
@@ -49,13 +50,13 @@
             </div>
         </div>
         <div class="mb-8">
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Subir una imagen</label>
+            <label class="block mb-2 text-normal font-normal text-gray-900 dark:text-white" for="file_input">Subir una imagen</label>
             <input formControlName="file" (change)="onFileChange($event)" accept=".jpg,.png" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
         </div>
 
         <div class="mt-8">
-            <button class="border py-3 px-2 rounded-lg w-full text-normal border-sky-600 bg-sky-600 text-white hover:border-sky-500 hover:bg-sky-500">  
-                Actualizar
+            <button [disabled]="!isValidAllFields()" class="border py-3 px-2 rounded-lg w-full text-normal border-sky-600 bg-sky-600 text-white hover:border-sky-500 hover:bg-sky-500">  
+                Agregar
             </button>
         </div> 
     </form>
@@ -68,4 +69,5 @@
         <p class="text-xl text-center text-white"> Error agregando el producto :( </p>
     </div>
 
+    </article>
 </main>

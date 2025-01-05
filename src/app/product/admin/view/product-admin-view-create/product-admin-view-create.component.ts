@@ -75,6 +75,13 @@ export class ProductAdminViewCreateComponent implements OnInit {
     this.file()?.reset();
   }
 
+  isValidAllFields() {
+    return !this.productName()?.invalid &&
+    !this.stock()?.invalid && 
+    !this.price()?.invalid &&
+    !this.file()?.invalid 
+  }
+
   async onSubmit() {
 
     var productName = this.productName()?.value;

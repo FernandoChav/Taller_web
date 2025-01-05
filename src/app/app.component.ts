@@ -10,6 +10,7 @@ import { NotFoundViewComponent } from './not-found/view/not-found-view/not-found
 import { ProductAdminViewComponent } from './product/admin/view/product-admin-view/product-admin-view.component';
 import { ProductAdminViewEditComponent } from './product/admin/view/product-admin-view-edit/product-admin-view-edit.component';
 import { ProductAdminViewCreateComponent } from './product/admin/view/product-admin-view-create/product-admin-view-create.component';
+import { PurchasingProcessViewComponent } from './purchasing-process/view/purchasing-process-view/purchasing-process-view.component';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ import { ProductAdminViewCreateComponent } from './product/admin/view/product-ad
     NotFoundViewComponent,
     ProductAdminViewComponent,
     ProductAdminViewEditComponent,
-    ProductAdminViewCreateComponent
+    ProductAdminViewCreateComponent,
+    PurchasingProcessViewComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
