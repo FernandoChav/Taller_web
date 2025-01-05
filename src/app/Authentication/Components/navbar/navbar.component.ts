@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Inject } from '@angular/core';
 import { LocalStorageService } from '../../Services/local-storage.service';
 import { Router } from '@angular/router';
+import { SessionService } from '../../../user/service/session.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,9 @@ export class NavbarComponent {
   userRole: string = ''; // Puede ser 'user' o 'admin'.
   private storageService = inject(LocalStorageService); // Servicio para manejar el almacenamiento local.
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    private sessionService : SessionService
+  ) {
     // Verifica si el usuario está logueado.
     if (this.storageService.getVar('token')) {
       this.isAuthenticated = true;
@@ -52,6 +55,12 @@ export class NavbarComponent {
     this.storageService.removeVar('token');
     this.storageService.removeVar('role');
     this.isAuthenticated = false;
+    this.sessionService.delete();
     this.router.navigate(['login']);
   }
+
+  goToProductAdmin() {
+    this.router.navigate(['product-admin']);
+  }
+
 }

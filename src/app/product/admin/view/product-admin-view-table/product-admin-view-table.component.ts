@@ -4,6 +4,7 @@ import { ProductService } from '../../../service/product.service';
 import { NgFor } from '@angular/common';
 import { RequestUpdateProduct } from '../../interface/request.update.product';
 import { Product } from '../../../interface/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-admin-view-table',
@@ -14,9 +15,17 @@ import { Product } from '../../../interface/product';
 })
 export class ProductAdminViewTableComponent {
 
+  private productNumberToString : Map<number, string> = new Map<number, string>()
+  .set(0, "Polera")
+  .set(1, "Gorro")
+  .set(2, "Juguetería")
+  .set(3, "Alimentación")
+  .set(4, "Libro");
+
   constructor(public serviceShared : AdminProductServiceShared,
       public productService : ProductService,
-    public requestUpdateProduct : RequestUpdateProduct) {}
+    public requestUpdateProduct : RequestUpdateProduct,
+  private router: Router) {}
 
   private update() {
     this.productService.query(
@@ -36,7 +45,12 @@ export class ProductAdminViewTableComponent {
 
   editProduct(product : Product) {
     this.requestUpdateProduct.product = product;
-    
+    this.router.navigate(['/edit-product']);
+  }
+
+
+  public translateProductType(value : number) {
+    return this.productNumberToString.get(value);
   }
 
 }

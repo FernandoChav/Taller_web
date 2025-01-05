@@ -48,6 +48,12 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: "edit-product",
+        loadComponent: () => import("../app/product/admin/view/product-admin-view-edit/product-admin-view-edit.component").then(m => m.ProductAdminViewEditComponent),
+        pathMatch: 'full',
+        canActivate: [authGuard]
+    },
+    {
         
         path: 'user',
         loadComponent : () => import('../app/user/view/user-view/user-view.component').then(m => m.UserViewComponent),

@@ -13,7 +13,6 @@ import { Product } from "../interface/product";
 })
 export class ProductService implements HttpObjectService<Product> {
 
-
     private readonly baseUrl : string;
     private readonly endpointService = "product/";
 
@@ -38,6 +37,26 @@ export class ProductService implements HttpObjectService<Product> {
 
         return this.http.post<Product>(url, formData);
 
+    }
+
+    updatePost(id : number,
+        name : string, price : string, stock : string, type : number, image : File | null) : Observable<Product> {
+        var url = `${this.baseUrl}update/${id}`;
+
+        var formData = new FormData();
+
+        formData.append("name", name);
+
+        if(image !== null){
+            formData.append("image", image);
+        }
+
+        formData.append("price",  price.toString());
+        formData.append("stock", stock.toString());
+        formData.append("productType", type.toString());
+
+        console.log(formData.get("name"));
+        return this.http.put<Product>(url, formData);
     }
 
     create(entity: Product, headers? : HttpHeaders): Observable<Product> {

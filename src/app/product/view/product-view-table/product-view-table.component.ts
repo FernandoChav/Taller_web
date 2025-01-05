@@ -17,6 +17,13 @@ import { CartItem } from '../../../shopping-cart/interface/shopping.cart';
 })
 export class ProductViewTableComponent {
 
+  private productNumberToString : Map<number, string> = new Map<number, string>()
+  .set(0, "Polera")
+  .set(1, "Gorro")
+  .set(2, "Juguetería")
+  .set(3, "Alimentación")
+  .set(4, "Libro");
+
   readonly controller : ProductController;
   
   constructor(controller : ProductController,
@@ -43,6 +50,10 @@ export class ProductViewTableComponent {
         console.log("SAVING COOKIE");
         document.cookie = `ShoppingCart=${next}`;
       });
+  }
+
+  public translateProductType(value : number) {
+    return this.productNumberToString.get(value);
   }
 
 }

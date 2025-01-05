@@ -36,7 +36,7 @@
                 {{ product.name }}
             </td>
             <td class="text-base px-1 py-1 sm:px-3 sm:py-2">
-                {{ product.type }}
+                {{ translateProductType(product.productType) }}
             </td>
             <td class="text-base px-1 py-1 sm:px-3 sm:py-2">
                 {{ product.price }}
@@ -51,7 +51,7 @@
                 <a (click) = "deleteProduct(product.id)" href="javascript:void(0);" class="text-left text-red-600">Eliminar</a>
             </td>
             <td class="text-base px-2 py-2 text-left text-sky-600">
-                <a (click) = "editProduct(product)" href="#" class="text-left text-sky-600">Editar</a>
+                <a (click) = "editProduct(product)" href="javascript:void(0);" class="text-left text-sky-600">Editar</a>
             </td>
         </tr>
         
