@@ -36,15 +36,16 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'profile-user',
+        loadComponent : () => import('../app/profile/view/profile-view/profile-view.component').then(m => m.ProfileViewComponent),
+        pathMatch: 'full',
+    },
+    {
         path: 'not-found',
         loadComponent : () => import('../app/not-found/view/not-found-view/not-found-view.component').then(m => m.NotFoundViewComponent),
         pathMatch: 'full'
     },
-    {
-        path: 'profile',
-        loadComponent : () => import('../app/profile/view/profile-view/profile-view.component').then(m => m.ProfileViewComponent),
-        pathMatch: 'full',
-    }
+    
 
     
     

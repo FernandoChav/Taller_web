@@ -3,11 +3,12 @@ import { CartItem } from '../interface/shopping.cart';
 import { ShoppingCartService } from '../service/shopping.cart.service';
 import { HttpShoppingCartService } from '../service/http.shopping.cart.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { NavbarComponent } from "../../Authentication/Components/navbar/navbar.component";
 
 @Component({
   selector: 'app-shopping-cart-view',
   standalone: true,
-  imports: [NgFor, NgIf, CommonModule],
+  imports: [NgFor, NgIf, CommonModule, NavbarComponent],
   templateUrl: './shopping-cart-view.component.html',
   styleUrl: './shopping-cart-view.component.css'
 })
