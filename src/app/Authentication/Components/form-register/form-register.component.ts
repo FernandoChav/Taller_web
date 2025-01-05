@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AuthenticatedService } from '../../Services/authenticated.service';
 import { LocalStorageService } from '../../Services/local-storage.service';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-form-register',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, ],
   templateUrl: './form-register.component.html',
   styleUrl: './form-register.component.css'
 })
@@ -32,15 +33,19 @@ export class FormRegisterComponent {
     
     formulario(){
         this.form = this.fb.group({
-          name: ['', Validators.required, Validators.minLength(8), Validators.maxLength(255)],
-          birthdate: ['', Validators.required,],
-          rut: ['', Validators.required,],
-          email: ['', Validators.required, Validators.email],
-          password: ['', Validators.required, Validators.minLength(8), Validators.maxLength(20)],
-          genderType: ['', Validators.required,],
-          repeatPassword: ['', Validators.required, Validators.minLength(8), Validators.maxLength(20)],
+          name: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]],
+          birthdate: ['', [Validators.required, this.birthdateNotInFutureValidator()]],
+          rut: ['', [Validators.required,]],
+          email: ['', [Validators.required, Validators.email]],
+          password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
+          genderType: ['', [Validators.required,]],
+          repeatPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
           
-        });
+        },
+        {
+          validators: this.passwordMatchValidator()
+        }
+      );
       }
     get emailValidate() { return this.form.get('email')?.invalid && this.form.get('email')?.touched; }
 
@@ -48,21 +53,41 @@ export class FormRegisterComponent {
 
     get nameValidate() { return this.form.get('name')?.invalid && this.form.get('name')?.touched; }
     get birthdateValidate() { return this.form.get('birthdate')?.invalid && this.form.get('birthdate')?.touched; }
+
+    passwordMatchValidator(): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+        const password = control.get('password')?.value;
+        const repeatPassword = control.get('repeatPassword')?.value;
+        
+        if (password && repeatPassword && password !== repeatPassword) {
+          return { 'passwordsDoNotMatch': true };
+        }
+        
+        return null;
+      }};
+      birthdateNotInFutureValidator(): ValidatorFn {
+        return (control: AbstractControl): ValidationErrors | null => {
+          const today = new Date();
+          const birthdate = control.value ? new Date(control.value) : null;
+      
+          // Verifica si la fecha es futura
+          if (birthdate && birthdate > today) {
+            return { 'birthdateInFuture': true };
+          }
+      
+          return null;
+        };
+      }
     async register(){
         if (this.form.invalid) {
             Object.values(this.form.controls).forEach(control => {
                 control.markAsTouched();
             });
+            console.log('form invalido');
             return;
         }
         try {
-            const password = this.form.value.password;
-            const repeatPassword = this.form.value.repeatPassword;
-            if (password !== repeatPassword) {
-              this.error = true;
-              this.errorMesage.push('Las contraseñas no coinciden.');
-              return;
-          }
+            
             // Obtener el valor del formulario
             const formData = this.form.value;
 
@@ -78,11 +103,7 @@ export class FormRegisterComponent {
 
             // Convertir el género al valor numérico esperado por el backend
             const genderValue = this.genderMapping[selectedGender.toLowerCase()];
-            console.log(genderValue);
-            if (genderValue === undefined) {
-              this.errorMesage.push('Seleccione un género válido.');
-              return;
-            }
+            
 
             // Crear el objeto de datos que se enviará al backend
             const requestData = {
@@ -97,9 +118,18 @@ export class FormRegisterComponent {
                 this.registerAlert = true;
             }
         } catch (error: any) {
-            this.error = true;
-            this.errorMesage.push(error);
-            console.log(error);
+          this.error = true;
+          if (error.status === 400) {
+            // Si el error es un error de validación (400), mostramos los mensajes específicos
+            this.errorMesage.push('Error en el registro: ' + error.error);
+          } else if (error.status === 500) {
+            // Si es un error interno del servidor (500), mostramos un mensaje genérico
+            this.errorMesage.push('Error inesperado en el servidor. Por favor, intente más tarde.');
+          } else {
+            // Para otros errores
+            this.errorMesage.push('Ocurrió un error. Intente nuevamente.');
+          }
+          console.log(error);
         }
     }
 

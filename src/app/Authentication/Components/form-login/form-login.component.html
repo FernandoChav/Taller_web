@@ -1,4 +1,12 @@
 <form [formGroup]="form" class="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
+    <div *ngIf="loginAlert" class="text-green-500 font-medium mb-4">
+      ¡Inicio de sesión exitoso! Redirigiendo...
+    </div>
+    <div *ngIf="error" class="text-red-500 font-medium mb-4">
+      <ul>
+        <li *ngFor="let msg of errorMesage">{{ msg }}</li>
+      </ul>
+    </div>
     <div class="mb-5">
       <label for="email" class="block text-sm font-medium text-blue-900 mb-2">Correo electrónico</label>
       <input
@@ -30,7 +38,7 @@
       <small
         *ngIf="passwordValidate"
         class = "text-red-500 font-medium-sm">
-        La contraseña debe tener al menos 6 caracteres
+        La contraseña debe tener al menos 8 caracteres
       ></small>
     </div>
     

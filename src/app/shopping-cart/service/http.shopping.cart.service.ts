@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { CartItem } from "../interface/shopping.cart";
 import { ShoppingCartService } from "./shopping.cart.service";
 import { Observable } from "rxjs";
@@ -12,7 +12,7 @@ import { Injectable } from "@angular/core";
 export class HttpShoppingCartService implements ShoppingCartService {
 
     private readonly baseUrl : string;
-    private readonly endpointService = "cart/";
+    private readonly endpointService = "api/";
 
     constructor(private httpClient : HttpClient) {
         this.baseUrl = enviroment.apiUrl + this.endpointService;
@@ -25,11 +25,14 @@ export class HttpShoppingCartService implements ShoppingCartService {
 
     addToCart(item: CartItem): Observable<CartItem[]> {
         console.log(`${this.baseUrl}add`)
-    
+        
+        console.log(document.cookie);
         return this.httpClient.post<CartItem[]>(
             `${this.baseUrl}add`,
             item,
-            {withCredentials : true}
+            {withCredentials : true, headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })}
         );
     }
 

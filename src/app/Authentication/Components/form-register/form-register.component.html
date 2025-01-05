@@ -1,93 +1,116 @@
-<div class="p-8 bg-white rounded-lg shadow-lg">
-    <!-- Logo de la Universidad -->
-    <div class="flex justify-center">
-      <img src="Isologo-UCN-2018.png" alt="Logo UCN" class="w-auto h-24 max-w-full">
-    </div>
-    <!-- Encabezado -->
-    <h1 class="text-3xl font-bold text-center text-blue-900 mb-6">¡Bienvenido a Tienda UCN!</h1>
-    <!-- Formulario -->
-    <form [formGroup]="form" class="space-y-4">
-      <!-- Nombre completo y RUT -->
-      <div class="grid grid-cols-2 gap-4">
-        <input
-        formControlName="name"
-        [class.is-invalid]="nameValidate"
-        id="name" 
-        type="text" 
-        placeholder="Nombre completo" 
-        class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <input
-        formControlName="rut"
-        id="rut" 
-        type="text" 
-        placeholder="RUT" 
-        class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+
+<div class="min-h-screen bg-gray-50">
+  <!-- Navbar -->
+  
+  <!-- Main Content -->
+  <main class="flex justify-center items-center py-10">
+    <div class="p-8 bg-white rounded-lg shadow-lg max-w-lg w-full">
+      <!-- Logo de la Universidad -->
+      <div class="flex justify-center mb-6">
+        <img src="Isologo-UCN-2018.png" alt="Logo UCN" class="w-auto h-24 max-w-full">
+      </div>
+
+      <!-- Encabezado -->
+      <h1 class="text-3xl font-bold text-center text-blue-900 mb-6">¡Bienvenido a Tienda UCN!</h1>
+
+      <!-- Formulario -->
+      <form [formGroup]="form" class="space-y-4">
+        <!-- Nombre completo y RUT -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input
+            formControlName="name"
+            [class.is-invalid]="nameValidate"
+            id="name" 
+            type="text" 
+            placeholder="Nombre completo" 
+            class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <input
+            formControlName="rut"
+            id="rut" 
+            type="text" 
+            placeholder="RUT" 
+            class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
         <div *ngIf="nameValidate" class="text-red-500 text-sm">
           El nombre es obligatorio y debe tener entre 8 y 255 caracteres.
-      </div>
-      </div>
-      <!-- Correo -->
-      <input
-      formControlName="email"
-      [class.is-invalid]="emailValidate"
-      id="email" 
-      type="email" 
-      placeholder="Correo" 
-      class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-      <div *ngIf="emailValidate" class="text-red-500 text-sm">
-        El correo es obligatorio
-      </div>
-      <!-- Contraseñas -->
-      <div class="grid grid-cols-2 gap-4">
-        <input
-        formControlName="password"
-        [class.is-invalid]="passwordValidate"
-        id="password"
-         type="password" 
-         placeholder="Contraseña" 
-         class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <div *ngIf="passwordValidate" class="text-red-500 text-sm">
-          La contraseña es obligatoria y debe tener entre 8 y 20 caracteres.
         </div>
-        
+
+        <!-- Correo -->
         <input
-        formControlName="repeatPassword"
-        [class.is-invalid]="passwordValidate" 
-        id="repeatPassword"
-        type="password" 
-        placeholder="Repetir contraseña" 
-        class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <div *ngIf="passwordValidate" class="text-red-500 text-sm">
-          La contraseña es obligatoria y debe tener entre 8 y 20 caracteres.
+          formControlName="email"
+          [class.is-invalid]="emailValidate"
+          id="email" 
+          type="email" 
+          placeholder="Correo" 
+          class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <div *ngIf="emailValidate" class="text-red-500 text-sm">
+          El correo es obligatorio.
         </div>
-        <div *ngIf="passwordMatch" class="text-red-500 text-sm">
+
+        <!-- Contraseñas -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input
+            formControlName="password"
+            [class.is-invalid]="passwordValidate"
+            id="password"
+            type="password" 
+            placeholder="Contraseña" 
+            class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <input
+            formControlName="repeatPassword"
+            [class.is-invalid]="passwordValidate" 
+            id="repeatPassword"
+            type="password" 
+            placeholder="Repetir contraseña" 
+            class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div *ngIf="passwordValidate" class="text-red-500 text-sm">
+          La contraseña es obligatoria y debe tener entre 8 y 20 caracteres y deben coincidir.
+        </div>
+        <div *ngIf="form.hasError('passwordsDoNotMatch') && form.get('repeatPassword')?.touched" class="text-red-500 text-sm">
           Las contraseñas no coinciden.
         </div>
+
+        <!-- Fecha de nacimiento y género -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input
+            formControlName="birthdate"
+            [class.is-invalid]="birthdateValidate" 
+            id="birthdate"
+            type="date" 
+            class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <select
+            formControlName="genderType" 
+            class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="" disabled selected>Género</option>
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div *ngIf="form.get('birthdate')?.hasError('birthdateInFuture') && form.get('birthdate')?.touched" class="text-red-500 text-sm">
+          La fecha de nacimiento no puede ser mayor que la fecha de hoy.
+        </div>
+
+        <!-- Botón de registro -->
+        <button
+          (click)="register()" 
+          type="submit" 
+          class="w-full bg-blue-700 text-white font-bold py-3 rounded-lg hover:bg-blue-800 transition duration-300">
+          Registrarse
+        </button>
+      </form>
+
+      <!-- Mensaje de éxito -->
+      <div *ngIf="registerAlert" class="text-green-500 text-center mt-4">
+        ¡Te has registrado exitosamente!
       </div>
-      <!-- Fecha de nacimiento y género -->
-      <div class="grid grid-cols-2 gap-4">
-        <input
-        formControlName="birthdate"
-        [class.is-invalid]="birthdateValidate" 
-        id="birthdate"
-        type="date" 
-        class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <select
-        formControlName = "genderType" 
-        class="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option value="" disabled selected>Género</option>
-          <option value="masculino">Masculino</option>
-          <option value="femenino">Femenino</option>
-          <option value="otro">Otro</option>
-        </select>
-      </div>
-      <!-- Botón de registro -->
-      <button
-      (click)="register()" 
-      type="submit" 
-      class="w-full bg-blue-700 text-white font-bold py-3 rounded-lg hover:bg-blue-800">Registrarse</button>
-    </form>
-    <div *ngIf="registerAlert" class="text-green-500 text-center mt-4">
-      ¡Te has registrado exitosamente!
     </div>
-  </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-4">
+    <p>&copy; 2025 Tienda UCN. Todos los derechos reservados.</p>
+  </footer>
+</div>
