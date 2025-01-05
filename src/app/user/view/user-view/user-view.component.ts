@@ -23,9 +23,7 @@ export class UserViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.all(
-        HttpHeaderUtil.asBearToken("token")
-    )
+    this.userService.all()
     .forEach(next => {
         this.userController.group = next;
     });

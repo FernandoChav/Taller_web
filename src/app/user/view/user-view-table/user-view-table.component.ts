@@ -42,8 +42,6 @@ export class UserViewTableComponent {
     this.controller.group
     ?.entities.forEach(user => {
       if(user.id == id){
-
-        console.log("ENCONTRADO, TIENE STATUS = " + user.isActive);
         status = !user.isActive;
         user.isActive = status;
       }
@@ -54,6 +52,10 @@ export class UserViewTableComponent {
     .forEach(user => {
         console.log("USER = " + user);
     });
+  }
+
+  public translateBirthdate(birthdate : string) : string  {
+    return birthdate.split('T')[0];
   }
 
 }

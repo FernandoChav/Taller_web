@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthenticatedService } from '../../Services/authenticated.service';
 import { LocalStorageService } from '../../Services/local-storage.service';
+import { User } from '../../../user/interface/user';
+import { SessionService } from '../../../user/service/session.service';
 
 @Component({
   selector: 'app-form-login',
@@ -18,6 +20,7 @@ export class FormLoginComponent {
   form! : FormGroup;
   private authenticatedService = inject(AuthenticatedService);
   private storageService = inject(LocalStorageService);
+  private sessionService = inject(SessionService);
   loginAlert: boolean = false;
   error : boolean = false;
   errorMesage : string[] = [];
@@ -36,6 +39,8 @@ export class FormLoginComponent {
 
   get passwordValidate() { return this.form.get('password')?.invalid && this.form.get('password')?.touched; }
 
+
+
   async login(){
     console.log(this.form.invalid);
     if (this.form.invalid) {
@@ -50,9 +55,10 @@ export class FormLoginComponent {
       console.log(this.form.value);
       const response = await this.authenticatedService.login(this.form.value);
       
-      
-      if (response.tokenContent) {
-        this.storageService.setVar('token', response.tokenContent);
+      this.sessionService.store(response.userView);
+
+      if (response.token.tokenContent != "") {
+        this.storageService.setVar('token', response.token.tokenContent);
         this.storageService.setVar('role', response.role.name);
         this.loginAlert = true;
         this.error = false;

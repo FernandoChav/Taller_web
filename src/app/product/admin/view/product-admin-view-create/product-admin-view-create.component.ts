@@ -96,7 +96,7 @@ export class ProductAdminViewCreateComponent implements OnInit {
     var typeProduct = TypesUtil.productTypeToNumber(this.typeProduct()?.value);
     var file = this.file()?.value;
 
-    this.productService.post(productName, stock, price, typeProduct.toString(), file, HttpHeaderUtil.asBearToken("") )
+    this.productService.post(productName, stock, price, typeProduct.toString(), file)
     .subscribe({
       next: () => {
         this.productAdded = true;

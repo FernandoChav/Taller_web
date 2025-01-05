@@ -30,6 +30,12 @@ export const routes: Routes = [
         canActivate: [userGuard]
     },
     {
+        path: 'profile-edit',
+        loadComponent : () => import('../app/user-panel/user-panel-edit/user-panel-edit.component').then(m => m.UserPanelEditComponent),
+        pathMatch: 'full',
+        canActivate: [userGuard]
+    }, 
+    {
         path: "product-admin",
         loadComponent: () => import("../app/product/admin/view/product-admin-view/product-admin-view.component").then(m => m.ProductAdminViewComponent),
         pathMatch: 'full',

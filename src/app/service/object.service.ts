@@ -7,7 +7,7 @@ export interface HttpObjectService<T> {
 
     create(entity : T, headers? : HttpHeaders) : Observable<T>
 
-    all(headers? : HttpHeaders) : Observable<EntityGroup<T>>
+    all() : Observable<EntityGroup<T>>
 
     query(parameters : ObjectParameters,
         headers? : HttpHeaders) : Observable<EntityGroup<T>>

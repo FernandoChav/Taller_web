@@ -73,8 +73,7 @@ export class ProductAdminViewEditComponent implements OnInit {
       parameters.add("TypeProduct", this.typeProduct()?.value);
     }
 
-    this.productService.update(this.userId, parameters, 
-        HttpHeaderUtil.asBearToken("")
+    this.productService.update(this.userId, parameters
     ).forEach(next => {
         console.log("UPDATED " + next);
     });

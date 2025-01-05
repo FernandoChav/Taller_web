@@ -36,7 +36,7 @@ export class ProductAdminViewTableComponent {
 
   editProduct(product : Product) {
     this.requestUpdateProduct.product = product;
-    // Navigate to update page
+    
   }
 
 }

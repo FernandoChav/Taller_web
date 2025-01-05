@@ -27,11 +27,8 @@ export class UserService implements HttpObjectService<User> {
         throw new Error("Method not implemented.");
     }
     
-    public all(headers?: HttpHeaders): Observable<EntityGroup<User>> {
-        if(headers == null) {
-            return EMPTY;
-        }
-        return this.http.get<EntityGroup<User>>(`${this.baseUrl}all`, { headers : headers});
+    public all(): Observable<EntityGroup<User>> {
+        return this.http.get<EntityGroup<User>>(`${this.baseUrl}all`);
     }
 
     public query(parameters: ObjectParameters, headers?: HttpHeaders): Observable<EntityGroup<User>> {

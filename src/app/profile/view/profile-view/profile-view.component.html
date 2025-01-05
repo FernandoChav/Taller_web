@@ -15,9 +15,8 @@
           <img src="https://via.placeholder.com/150" alt="Foto de Perfil" class="w-full h-full object-cover">
         </div>
         <div class="ml-6">
-          <h2 class="text-3xl font-semibold text-gray-800">Juan Pérez</h2>
-          <p class="text-sm text-gray-500">Desarrollador Web</p>
-          <p class="text-sm text-gray-500">juan.perez.com</p>
+          <h2 class="text-3xl font-semibold text-gray-800">{{ getUser().name }}</h2>
+          <p class="text-sm text-gray-500">Rut : {{ getUser().rut }}</p>
         </div>
       </div>
   
@@ -26,20 +25,15 @@
         <div>
           <h3 class="text-xl font-semibold text-gray-800">Datos Personales</h3>
           <ul class="text-gray-600">
-            <li><strong>Fecha de Nacimiento:</strong> 01/01/1990</li>
-            <li><strong>Género:</strong> Masculino</li>
-            <li><strong>Teléfono:</strong> +56 9 1234 5678</li>
+            <li><strong>Fecha de Nacimiento:</strong> {{ getUser().birthdate }} </li>
+            <li><strong>Género:</strong> {{ translateGender(getUser().genderType) }}</li>
           </ul>
-        </div>
-        <div>
-          <h3 class="text-xl font-semibold text-gray-800">Dirección</h3>
-          <p class="text-gray-600">Av. Libertador Bernardo O'Higgins 1234, Santiago, Chile</p>
         </div>
       </div>
   
       <!-- Opciones de Editar y Configuración -->
       <div class="flex justify-between items-center border-t border-gray-200 pt-6">
-        <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+        <button (click) = "redirectUserEdit()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
           Editar Perfil
         </button>
         <button class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600">

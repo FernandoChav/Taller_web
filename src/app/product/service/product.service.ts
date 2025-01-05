@@ -22,7 +22,7 @@ export class ProductService implements HttpObjectService<Product> {
     }
 
 
-    post(name : string, price : string, stock : string, type : string, image : File, headers? : HttpHeaders
+    post(name : string, price : string, stock : string, type : string, image : File
     ) : Observable<Product> {
         
         var url = `${this.baseUrl}create`;
@@ -45,7 +45,7 @@ export class ProductService implements HttpObjectService<Product> {
         return this.http.post<Product>(url, entity, {headers : headers});
     }
     
-    update(id: number, parameters: ObjectParameters, headers_: HttpHeaders): Observable<Product> {
+    update(id: number, parameters: ObjectParameters): Observable<Product> {
         if(parameters == null){
             return EMPTY;
         }
@@ -54,7 +54,7 @@ export class ProductService implements HttpObjectService<Product> {
 
         var dictionary = parameters.getParameters();
         var body = Object.fromEntries(dictionary);
-        return this.http.put<Product>(url, body, {headers : headers_});
+        return this.http.put<Product>(url, body);
     }
 
     all(): Observable<EntityGroup<Product>> {
