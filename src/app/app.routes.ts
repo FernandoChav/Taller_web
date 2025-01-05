@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './Authentication/Guards/auth.guard';
+import { authGuard, userGuard } from './Authentication/Guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -24,6 +24,12 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'profile',
+        loadComponent : () => import('../app/profile/view/profile-view/profile-view.component').then(m => m.ProfileViewComponent),
+        pathMatch: 'full',
+        canActivate: [userGuard]
+    },
+    {
         path: "product-admin",
         loadComponent: () => import("../app/product/admin/view/product-admin-view/product-admin-view.component").then(m => m.ProductAdminViewComponent),
         pathMatch: 'full',
@@ -46,11 +52,6 @@ export const routes: Routes = [
         path: '**',
         redirectTo: 'not-found',
         pathMatch: 'full'
-    },
-    {
-        path: 'profile-user',
-        loadComponent : () => import('../app/profile/view/profile-view/profile-view.component').then(m => m.ProfileViewComponent),
-        pathMatch: 'full',
     },
     {
         path: 'not-found',

@@ -24,7 +24,7 @@ export class NavbarComponent {
 
   }
   profile(){ 
-    this.router.navigate(['profile-user']);
+    this.router.navigate(['profile']);
   }
 
   log(){
