@@ -18,5 +18,8 @@ export class LocalStorageService {
     localStorage.removeItem(key);
   }
 
+  deleteMany(...keys : string[]) {
+      keys.forEach(key => this.removeVar(key));
+  }
   
 }

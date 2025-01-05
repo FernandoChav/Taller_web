@@ -10,7 +10,7 @@ export class SessionService {
     constructor(private storageService : LocalStorageService) {}
     
     store(user : User) : void {
-        console.log("GUARDANDO USUARIO");
+
         this.storageService.setVar('name', user.name);
         this.storageService.setVar('birthdate', user.birthdate.split('T')[0]);
         this.storageService.setVar('gender', user.genderType);
@@ -29,6 +29,15 @@ export class SessionService {
         };
 
         return userRead;
+    }
+
+    delete() : void {
+        this.storageService.deleteMany("name",
+            "birthdate",
+            "gender",
+            "rut",
+            "id"
+        );
     }
 
 }
