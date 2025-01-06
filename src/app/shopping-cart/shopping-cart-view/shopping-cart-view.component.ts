@@ -5,6 +5,10 @@ import { HttpShoppingCartService } from '../service/http.shopping.cart.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { NavbarComponent } from "../../Authentication/Components/navbar/navbar.component";
 
+/**
+ * This component show the shopping cart 
+ */
+
 @Component({
   selector: 'app-shopping-cart-view',
   standalone: true,
@@ -14,14 +18,31 @@ import { NavbarComponent } from "../../Authentication/Components/navbar/navbar.c
 })
 export class ShoppingCartViewComponent implements OnInit {
 
+  /**
+   * A set items that contains the shopping cart
+   */
+
   private items : CartItem[] = [];
+
+  /**
+   * The final price for pay
+   */
+
   private finalPrice : number = 0;
 
   constructor(private shoppingCartService : HttpShoppingCartService) {}
 
+  /**
+   * This method assign the final price in zero
+   */
+
   resetFinalPrice() {
     this.finalPrice = 0;
   }
+
+  /**
+   * This method calculate the final price, sum all prices of products
+   */
 
   calculateFinalPrice() {
     this.resetFinalPrice();
@@ -30,6 +51,10 @@ export class ShoppingCartViewComponent implements OnInit {
     }
   }
 
+  /**
+   * The start method load all cart item 
+   */
+
   ngOnInit(): void {
       this.shoppingCartService.get()
       .forEach(next => {
@@ -37,9 +62,19 @@ export class ShoppingCartViewComponent implements OnInit {
       });
   }
 
+  /**
+   * Return the items
+   * @returns the items
+   */
+
   public getItems() : CartItem[] {
     return this.items;
   }
+
+  /**
+   * Return the final price
+   * @returns the final price
+   */
 
   public getFinalPrice() : number {
     return this.finalPrice;
