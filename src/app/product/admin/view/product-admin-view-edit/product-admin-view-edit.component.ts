@@ -11,6 +11,10 @@ import { NavbarComponent } from '../../../../Authentication/Components/navbar/na
 import { FooterComponent } from '../../../../footer/footer.component';
 import { Router } from '@angular/router';
 
+/**
+ * This component is used when a product is edited 
+ */
+
 @Component({
   selector: 'app-product-admin-view-edit',
   standalone: true,
@@ -24,12 +28,20 @@ FooterComponent],
 })
 export class ProductAdminViewEditComponent implements OnInit {
 
+  /**
+   * A map that contains the representation product numeric to product type string
+   */
+
   private productNumberToString : Map<number, string> = new Map<number, string>()
   .set(0, "Polera")
   .set(1, "Gorro")
   .set(2, "Juguetería")
   .set(3, "Alimentación")
   .set(4, "Libro");
+
+  /**
+   * A map that contains the represention to product type string to product numeric
+   */
 
   private readonly typesProductToInt = new Map<string, number>()
     .set("Polera", 0)
@@ -38,8 +50,22 @@ export class ProductAdminViewEditComponent implements OnInit {
     .set("Alimentación", 3)
     .set("Libro", 4);
 
+  /**
+   * The forms
+   */
+
   forms!: FormGroup;
+
+  /**
+   * The product user id for edit
+   */
+
   productId : number = 0;
+
+  /**
+   * The product data for edit
+   */
+
   product : Product | undefined;
 
   constructor(private formBuilder : FormBuilder,
@@ -55,6 +81,11 @@ export class ProductAdminViewEditComponent implements OnInit {
     this.productId = this.product?.id;
   }
   
+  /**
+   * This method is used when the component start,
+   *  this call for create the form and assign the product data in form
+   */
+
   ngOnInit(): void {
     this.createForm();
 
@@ -66,6 +97,10 @@ export class ProductAdminViewEditComponent implements OnInit {
     });
   }
 
+  /**
+   * Create a form 
+   */
+
   createForm() : void {
       this.forms = this.formBuilder.group({
         productName : ['', [Validators.minLength(10), Validators.maxLength(64)]],
@@ -76,25 +111,55 @@ export class ProductAdminViewEditComponent implements OnInit {
       });
   }
 
+  /**
+   * Get the product name
+   * @returns the product name
+   */
+
   productName() {
     return this.forms.get('productName');
   }
+
+  /**
+   * Get the stock
+   * @returns the stock
+   */
 
   stock() {
     return this.forms.get('stock');
   }
 
+  /**
+   * Get the price
+   * @returns the price
+   */
+
   price() {
     return this.forms.get('price');
   }
+
+  /**
+   * Get the type product
+   * @returns  the type product
+   */
 
   typeProduct() {
     return this.forms.get('typeProduct');
   }
 
+  /**
+   * Get the file product
+   * @returns the file product
+   */
+
   file() {
     return this.forms.get('file');
   }
+
+  /**
+   * Check if all fields are valid 
+   * @returns a boolean that if all fields are valid
+   */
 
   isValidAllFields(){
     return !this.productName()?.invalid &&
@@ -123,6 +188,12 @@ export class ProductAdminViewEditComponent implements OnInit {
     })
   }
 
+  /**
+   * Convert a product to number to product type string 
+   * @param value 
+   * @returns 
+   */
+
   public translateProductType(value : number | undefined) : string {
     if(value === undefined){
       return "Gorro";
@@ -135,6 +206,12 @@ export class ProductAdminViewEditComponent implements OnInit {
     return response;
   }
 
+  /**
+   * Convert a product type string to product type number
+   * @param value 
+   * @returns 
+   */
+
   public translateToIntProductType(value : string) : number  {
     let response = this.typesProductToInt.get(value);
     if(response == undefined){
@@ -143,9 +220,18 @@ export class ProductAdminViewEditComponent implements OnInit {
     return response;
   }
 
+  /**
+   * This method go to product-admin page
+   */
+
   back() {
     this.router.navigate(['product-admin']);
   }
+
+  /**
+   * This method is invoked when a new file is added and it is added form 
+   * @param event the event
+   */
 
   onFileChange(event : Event) : void {
     const input = event.target as HTMLInputElement;

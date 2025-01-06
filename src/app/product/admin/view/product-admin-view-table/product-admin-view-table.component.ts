@@ -6,6 +6,10 @@ import { RequestUpdateProduct } from '../../interface/request.update.product';
 import { Product } from '../../../interface/product';
 import { Router } from '@angular/router';
 
+/**
+ * This component represent the table for manage the users as administrator 
+ */
+
 @Component({
   selector: 'app-product-admin-view-table',
   standalone: true,
@@ -14,6 +18,10 @@ import { Router } from '@angular/router';
   styleUrl: './product-admin-view-table.component.css'
 })
 export class ProductAdminViewTableComponent {
+
+  /**
+   * This is a map that contains a way for represent a number as string product name 
+   */
 
   private productNumberToString : Map<number, string> = new Map<number, string>()
   .set(0, "Polera")
@@ -27,6 +35,10 @@ export class ProductAdminViewTableComponent {
     public requestUpdateProduct : RequestUpdateProduct,
   private router: Router) {}
 
+  /**
+   * Update all products, searched from http requets
+   */
+
   private update() {
     this.productService.query(
         this.serviceShared.parameters()
@@ -34,6 +46,11 @@ export class ProductAdminViewTableComponent {
       this.serviceShared.group = promise;
     });
   }
+
+  /**
+   * Delete a product from product id
+   * @param productId the product id for delete
+   */
 
   deleteProduct(productId : number) {
     this.productService.delete(productId)
@@ -43,11 +60,22 @@ export class ProductAdminViewTableComponent {
     });
   }
 
+  /**
+   * Go to section edit product and save the product 
+   * @param product the product for edit
+   */
+
   editProduct(product : Product) {
     this.requestUpdateProduct.product = product;
     this.router.navigate(['/edit-product']);
   }
 
+
+  /**
+   * Convert a number product to string product 
+   * @param value the number value 
+   * @returns the product type name
+   */
 
   public translateProductType(value : number) {
     return this.productNumberToString.get(value);

@@ -3,6 +3,11 @@ import { ProductService } from '../../../service/product.service';
 import { AdminProductServiceShared } from '../../service/admin.product.service.shared';
 import { Router } from '@angular/router';
 
+/**
+ * This componet perms handler interactions for products
+ * As search or go the next and previous
+ */
+
 @Component({
   selector: 'app-product-admin-view-interactions',
   standalone: true,
@@ -16,6 +21,11 @@ export class ProductAdminViewInteractionsComponent {
       public productService : ProductService,
       private router: Router) {}
   
+  /**
+   * Search product by name
+   * @param event the event
+   */
+
   onSearch(event : Event) {
     this.serviceShared.resetPage();
 
@@ -29,9 +39,17 @@ export class ProductAdminViewInteractionsComponent {
     });
   }
 
+  /**
+   * Reset the page to page 1
+   */
+
   reset(): void {
     this.serviceShared.resetPage(); 
 }
+
+  /**
+   * Update all products 
+   */
 
   private update() {
     this.productService.query(
@@ -41,15 +59,27 @@ export class ProductAdminViewInteractionsComponent {
     });
   }
 
+  /**
+   * Go to the next page
+   */
+
   nextPage(): void {
     this.serviceShared.page++;
     this.update();
   }
 
+  /**
+   * Go the previous page
+   */
+
   previousPage(): void {
     this.serviceShared.page--;
     this.update();
   }
+
+  /**
+   * This method send the create product page
+   */
 
   redirectCreateUser() {
     this.router.navigate(['/create-product']);
