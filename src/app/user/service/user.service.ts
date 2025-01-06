@@ -31,18 +31,14 @@ export class UserService implements HttpObjectService<User> {
         return this.http.get<EntityGroup<User>>(`${this.baseUrl}all`);
     }
 
-    public query(parameters: ObjectParameters, headers?: HttpHeaders): Observable<EntityGroup<User>> {
-        if(headers == null){
-            return EMPTY;
-        }
-
+    public query(parameters: ObjectParameters): Observable<EntityGroup<User>> {
         var query = UrlUtil.
                 buildUrl(parameters);
         var url = `${this.baseUrl}all${query}`;
-        return this.http.get<EntityGroup<User>>(url, {headers : headers});
+        return this.http.get<EntityGroup<User>>(url);
     }
 
-    public update(id: number, parameters: ObjectParameters, headers: HttpHeaders): Observable<User> {
+    public update(id: number, parameters: ObjectParameters): Observable<User> {
         if(parameters == null){
             return EMPTY;
         }
@@ -54,7 +50,7 @@ export class UserService implements HttpObjectService<User> {
 
         console.log(url);
         console.log(body);
-        return this.http.put<User>(url, body, {headers : headers})
+        return this.http.put<User>(url, body)
     }
 
 }

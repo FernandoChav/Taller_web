@@ -2,13 +2,28 @@ import { Injectable } from "@angular/core";
 import { User } from "../interface/user";
 import { LocalStorageService } from "../../Authentication/Services/local-storage.service";
 
+/**
+ * This is a session service for store in local storage service 
+ * the user has logged 
+ */
+
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
+    /**
+     * The main constructor 
+     * @param storageService this is the storage service
+     */
+
     constructor(private storageService : LocalStorageService) {}
     
+    /**
+     * Store a user in local storage 
+     * @param user 
+     */
+
     store(user : User) : void {
 
         this.storageService.setVar('name', user.name);
@@ -17,6 +32,11 @@ export class SessionService {
         this.storageService.setVar('rut', user.rut);
         this.storageService.setVar('id', user.id);
     }
+
+    /**
+     * 
+     * @returns Get the user logged from local storage
+     */
 
     get() : User {
         var userRead : User  = {
@@ -30,6 +50,11 @@ export class SessionService {
 
         return userRead;
     }
+
+    /**
+     * Delete user logged from local storage
+     * this is used when user over the session
+     */
 
     delete() : void {
         this.storageService.deleteMany("name",

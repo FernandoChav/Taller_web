@@ -5,6 +5,11 @@ import { LocalStorageService } from '../../Services/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "../navbar/navbar.component";
 
+/**
+ * This is a component for make a register requets, contains a form for send the requets
+ */
+
+
 @Component({
   selector: 'app-form-register',
   standalone: true,
@@ -13,24 +18,61 @@ import { NavbarComponent } from "../navbar/navbar.component";
   styleUrl: './form-register.component.css'
 })
 export class FormRegisterComponent {
+
+     /**
+   * This is reactive form
+   */
+
     form! : FormGroup;
     private authenticatedService = inject(AuthenticatedService);
+
+    /**
+     * This is the storage service 
+     */
+
     private storageService = inject(LocalStorageService);
+
+    /**
+   * This is a boolean that show is registered sucessful
+   */
+    
     registerAlert: boolean = false;
+
+ /**
+   * This is a boolean that show is failed to register
+   */
+
     error : boolean = false;
+
+  /**
+   * Contains the error message
+   */
+
     errorMesage : string[] = [];
+
+  /**
+   * This is a map for manage gender as numbers
+   */
+
     genderMapping: { [key: string]: number } = {
       femenino: 0, // Female
       masculino: 1, // Male
       otro: 2,      // Other
       no_especificado: 3, // NotSpecified (opcional)
     };
+
+
+
   passwordMatch: boolean = false;
 
     constructor(private fb: FormBuilder) {
         this.formulario();
       }
     
+     /**
+   * This method create the form 
+   */
+
     formulario(){
         this.form = this.fb.group({
           name: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]],
@@ -47,12 +89,35 @@ export class FormRegisterComponent {
         }
       );
       }
+
+    /**
+     * Check if the field email is validate
+     */
+
     get emailValidate() { return this.form.get('email')?.invalid && this.form.get('email')?.touched; }
+
+    /**
+     * Check if the password is validate
+     */
 
     get passwordValidate() { return this.form.get('password')?.invalid && this.form.get('password')?.touched; }
 
+      /**
+       * Check if the name is validate
+       */
+
     get nameValidate() { return this.form.get('name')?.invalid && this.form.get('name')?.touched; }
+
+      /**
+       * Check if the birthdate is validate
+       */
+
     get birthdateValidate() { return this.form.get('birthdate')?.invalid && this.form.get('birthdate')?.touched; }
+
+    /**
+     * This is valdiator for check if the password match 
+     * @returns a response true or false if the password match
+     */
 
     passwordMatchValidator(): ValidatorFn {
       return (control: AbstractControl): ValidationErrors | null => {
@@ -65,6 +130,13 @@ export class FormRegisterComponent {
         
         return null;
       }};
+
+      /**
+       * This is a validator for check if a date is not future to
+       * actual date
+       * @returns a boolean isthe birthdate is true o false
+       */
+
       birthdateNotInFutureValidator(): ValidatorFn {
         return (control: AbstractControl): ValidationErrors | null => {
           const today = new Date();
@@ -78,6 +150,12 @@ export class FormRegisterComponent {
           return null;
         };
       }
+
+    /**
+     * Make a register using the date from form
+     * @returns  void 
+     */
+
     async register(){
         if (this.form.invalid) {
             Object.values(this.form.controls).forEach(control => {

@@ -10,6 +10,11 @@ import { ProductController } from '../../controller/product.controller';
 import { NavbarComponent } from "../../../Authentication/Components/navbar/navbar.component";
 import { FooterComponent } from '../../../footer/footer.component';
 
+/**
+ * This is the main component that contains the interaction and table component 
+ * and represent the page for view products
+ */
+
 @Component({
   selector: 'app-product-view',
   standalone: true,
@@ -21,7 +26,16 @@ import { FooterComponent } from '../../../footer/footer.component';
 })
 export class ProductViewComponent implements OnInit {
 
+  /**
+   * The product service for manage products
+   */
+
   private readonly productService : ProductService;
+
+  /**
+    A controller-service for use components shared
+  */
+
   private readonly controller : ProductController;
 
   constructor(productService : ProductService,
@@ -30,6 +44,10 @@ export class ProductViewComponent implements OnInit {
     this.productService = productService;
     this.controller = controller;
   }
+
+  /**
+   * Load the first users and assign it
+   */
 
   ngOnInit(): void {
     this.productService.query(

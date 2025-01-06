@@ -7,6 +7,10 @@ import { ProductAdminViewInteractionsComponent } from '../product-admin-view-int
 import { NavbarComponent } from '../../../../Authentication/Components/navbar/navbar.component';
 import { FooterComponent } from '../../../../footer/footer.component';
 
+/**
+ * This is the main components for rende1r a admin product manager
+ */
+
 @Component({
   selector: 'app-product-admin-view',
   standalone: true,
@@ -24,7 +28,11 @@ export class ProductAdminViewComponent implements OnInit {
     public productService : ProductService
   ) {}
 
-   ngOnInit(): void {
+  /**
+   * This method load the first products in cache
+   */
+
+  ngOnInit(): void {
       
       this.productService.query(
         ObjectParameters.newParameters()

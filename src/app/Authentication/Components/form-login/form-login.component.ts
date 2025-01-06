@@ -8,6 +8,10 @@ import { LocalStorageService } from '../../Services/local-storage.service';
 import { User } from '../../../user/interface/user';
 import { SessionService } from '../../../user/service/session.service';
 
+/**
+ * This is a login component that contains a form for make a authentication
+ */
+
 @Component({
   selector: 'app-form-login',
   standalone: true,
@@ -16,18 +20,63 @@ import { SessionService } from '../../../user/service/session.service';
   styleUrl: './form-login.component.css'
 })
 export class FormLoginComponent {
+
+  /**
+   * This is the router for navigate
+   */
+
   router = inject(Router);
+
+  /**
+   * This is reactive form
+   */
+
   form! : FormGroup;
+
+  /**
+   * The authentication service injected
+   */
+
   private authenticatedService = inject(AuthenticatedService);
+
+  /**
+   * The storage service
+   */
+
   private storageService = inject(LocalStorageService);
+
+  /**
+   * The session service
+   */
+
   private sessionService = inject(SessionService);
+
+    /**
+     * This is a boolean that show is logged sucessful
+     */
+
   loginAlert: boolean = false;
+
+  /**
+   * This is a boolean that show is failed to authenticate
+   */
+
   error : boolean = false;
+
+  /**
+   * This is a set errors 
+   */
+
   errorMesage : string[] = [];
 
   constructor(private fb: FormBuilder) {
     this.formulario();
   }
+
+  /**
+   * This method create the form 
+   */
+
   formulario(){
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -35,11 +84,22 @@ export class FormLoginComponent {
     });
   }
 
+  /**
+   * Check if the field email is validate
+   */
+
   get emailValidate() { return this.form.get('email')?.invalid && this.form.get('email')?.touched; }
+
+  /**
+   * Check if the password is validate
+   */
 
   get passwordValidate() { return this.form.get('password')?.invalid && this.form.get('password')?.touched; }
 
-
+  /**
+   * Auhenticate with server
+   * @returns  the response authentication
+   */
 
   async login(){
     console.log(this.form.invalid);

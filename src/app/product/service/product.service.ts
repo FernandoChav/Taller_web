@@ -21,6 +21,16 @@ export class ProductService implements HttpObjectService<Product> {
     }
 
 
+    /**
+     * Create a new product sending a HTTP requets
+     * @param name the name 
+     * @param price the price
+     * @param stock the stock
+     * @param type the type
+     * @param image the image for sent
+     * @returns a product created
+     */
+
     post(name : string, price : string, stock : string, type : string, image : File
     ) : Observable<Product> {
         
@@ -38,6 +48,17 @@ export class ProductService implements HttpObjectService<Product> {
         return this.http.post<Product>(url, formData);
 
     }
+
+    /**
+     * Update the product from the next parameters
+     * @param id the id product for update
+     * @param name the name, can be optional
+     * @param price the price, can be optional
+     * @param stock the stock, can be optional
+     * @param type the type, can be optional
+     * @param image the image, can be optional
+     * @returns 
+     */
 
     updatePost(id : number,
         name : string, price : string, stock : string, type : number, image : File | null) : Observable<Product> {
@@ -59,9 +80,9 @@ export class ProductService implements HttpObjectService<Product> {
         return this.http.put<Product>(url, formData);
     }
 
-    create(entity: Product, headers? : HttpHeaders): Observable<Product> {
+    create(entity: Product): Observable<Product> {
         var url = `${this.baseUrl}create`;
-        return this.http.post<Product>(url, entity, {headers : headers});
+        return this.http.post<Product>(url, entity);
     }
     
     update(id: number, parameters: ObjectParameters): Observable<Product> {
