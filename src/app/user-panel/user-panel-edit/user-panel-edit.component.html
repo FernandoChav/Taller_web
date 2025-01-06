@@ -1,0 +1,61 @@
+<div class="sm:px-16 bg-gray-50 min-h-screen">
+    <header class="shadow-md bg-white">
+        <app-navbar></app-navbar>
+      </header>
+    
+    <div class="w-full px-4 py-4 sm:flex sm:items-center sm:justify-center sm:py-20">
+        <main class="px-32 py-8">
+            <h2 class="text-3xl mb-2">Edición de usuario</h2>
+            <hr class="mb-8">
+            <form [formGroup] = "forms" (ngSubmit) = "onSubmit()">
+                <div class="sm:flex mb-8">
+                    <div class="sm:flex sm:flex-col mr-24 w-1/2">
+                        <label for="name" class="text-normal">Nombre</label>
+                        <input type="text" class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300" id="name" formControlName="name" placeholder="">
+                    </div>
+                    <div class="sm:flex sm:flex-col w-1/2">
+                        <label for="rut" class="text-normal">Rut</label>
+                        <input class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300 " type="text" id="name" placeholder="21544970-K" formControlName="rut">
+                    </div>
+                </div>
+                <div class="sm:flex mb-8">
+                    <div class="sm:flex sm:flex-col mr-24 w-1/2">
+                        <label for="name" class="text-normal">Fecha de nacimiento</label>
+                        <input type="date" class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300" id="birthdate" formControlName="birthdate">
+                    </div>
+                    <div class="sm:flex sm:flex-col w-1/2">
+                        <label for="rut" class="text-normal">Género</label>
+                        <select class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300 " type="text" id="gender" formControlName="rut">
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Otro">Otro</option>
+                            <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sm:flex mb-8">
+                    <div class="sm:flex sm:flex-col mr-24 w-1/2">
+                        <label for="name" class="text-normal">Identificador</label>
+                        <input type="text" class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300" id="id" placeholder="1" formControlName="id">
+                    </div>
+                    <div class="sm:flex sm:flex-col w-1/2">
+                        <label for="rut" class="text-normal">Cuenta Activa</label>
+                        <input class="px-2 py-2 rounded-lg bg-gray-50 border border-gray-300 " type="text" id="isActive"  formControlName="isActive" placeholder="Activo">
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <button class="w-full border py-3 px-2 rounded-lg w-1/2 text-normal border-sky-600 bg-sky-600 text-white hover:border-sky-500 hover:bg-sky-500 mb-4">  
+                        Actualizar
+                    </button>
+                    <button (click)="back()" class="w-full border py-3 px-2 rounded-lg w-1/2 text-normal border-white-600 bg-white-500 text-black hover:border-white-500 hover:bg-white-500">  
+                        Atras
+                    </button>
+                </div> 
+            </form>
+        </main>
+    </div>
+</div>
+
+
+
+<app-footer></app-footer>

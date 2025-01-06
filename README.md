@@ -1,27 +1,104 @@
-# TallerWeb
+# 🌟 Tienda UCN - E-Commerce Web 🌟
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+## 📜Descripción
+Bienvenido a Tienda UCN, un e-commerce web creado con Angular 18. Este proyecto permite a los usuarios navegar por productos, agregar artículos al carrito de compras, y realizar autenticaciones para gestionar sus compras. Además, los administradores pueden gestionar el catálogo de productos y usuarios. 🛒
 
-## Development server
+## 🚀Funcionalidades
+- 👀 **Visualización de Productos**: Los usuarios pueden ver una lista de productos con detalles como nombre, tipo, precio y disponibilidad.
+- 🔍 **Paginación y Filtrado**: Los productos pueden ser filtrados por tipo y ordenados por precio. Además, la lista de productos tiene soporte de paginación para una navegación más sencilla.
+- 🛒 **Carrito de Compras**: Los usuarios pueden agregar productos al carrito, ver el total y proceder a la compra.
+- 🔑 **Autenticación**: Los usuarios pueden iniciar sesión para realizar compras y administrar su cuenta.
+- ⚙️ **Gestión de Productos (Administrador)**: Los administradores pueden añadir, editar y eliminar productos, además de gestionar las cuentas de los clientes.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## 🛠️ Tecnologías Utilizadas
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Angular 18**: Framework para el desarrollo del frontend.
+- **Tailwind CSS**: Framework CSS para el diseño estilizado y responsivo 🎨.
+- **Flowbite**: Biblioteca de componentes preconstruidos basada en Tailwind.
+- **RxJS**: Programación reactiva para la gestión de datos y suscripciones.
+- **API REST**: Backend que sirve como fuente de datos para los usuarios y productos.
+- **Autenticación**: JWT (JSON Web Tokens) 🔐 
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🔧 Requisitos Previos
 
-## Running unit tests
+Antes de comenzar, asegúrate de tener instaladas las siguientes herramientas:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- [Node.js](https://nodejs.org/) (versión 18.x o superior recomendada)
+- [Angular CLI](https://angular.io/cli) (versión 18 o superior)
+- [Tailwind CLI](https://tailwindcss.com/docs/installation)
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## 📥 Instalación
 
-## Further help
+Sigue estos pasos para instalar y configurar el proyecto en tu máquina local:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. **Clona el Repositorio**
+
+   ```bash
+   git clone https://github.com/FernandoChav/Taller_web
+   cd taller_web
+   ```
+
+2. **Restaura las Dependencias**
+
+   Ejecuta el siguiente comando para instalar las dependencias del proyecto:
+
+   ```bash
+   npm install
+   ```
+
+3. **Configura Tailwind CSS**
+
+   Asegúrate de que el archivo `tailwind.config.js` esté configurado correctamente. Tailwind CSS ya debería estar instalado con el comando anterior.
+
+   Si necesitas verificar la configuración, revisa:
+
+   ```javascript
+    /** @type {import('tailwindcss').Config} */
+    module.exports = {
+    content: [
+        "./src/**/*.{html,ts}",
+        "./node_modules/flowbite/**/*.js" // add this line
+    ],
+    theme: {
+        extend: {},
+    },
+    plugins: [
+        require('flowbite/plugin')
+    ],
+    }
+   ```
+
+4. **Verifica la API REST**
+
+   Asegúrate de que el backend esté funcionando en la URL correcta. Por defecto, el proyecto espera que la API esté en: `http://localhost:5026/`.
+
+---
+
+## ⚡ Levantar el Servidor de Desarrollo
+
+Para iniciar la aplicación, ejecuta:
+
+```bash
+ng serve
+```
+
+Luego, navega a [http://localhost:4200](http://localhost:4200) en tu navegador. El servidor recargará automáticamente los cambios en el código fuente.
+
+---
+
+
+
+## 🔧 Problemas Comunes
+
+### Error: "Cannot find module 'tailwindcss'"
+
+Asegúrate de haber ejecutado `npm install` correctamente. Si persiste, instala Tailwind manualmente:
+
+```bash
+npm install tailwindcss --save-dev
+npx tailwindcss init

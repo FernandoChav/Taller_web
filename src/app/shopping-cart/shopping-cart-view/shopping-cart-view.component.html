@@ -1,0 +1,56 @@
+<div class="min-h-screen bg-[#D2B48C] flex flex-col">
+    <!-- Navbar -->
+    <header class="bg-white shadow-md mb-8">
+      <app-navbar></app-navbar>
+    </header>
+  
+    <!-- Contenido Principal -->
+    <main class="flex-grow px-16 w-full sm:px-96">
+      <!-- Carro de compras -->
+      <div class="w-full shadow-lg border rounded-lg border-gray-200 py-4 px-8 bg-white">
+        <h3 class="font-medium text-xl text-sky-600 pb-2">Carro de compras 🛒</h3>
+        
+        <ul>
+          <div *ngIf="getItems().length > 0; else withoutProducts">
+            <div *ngFor="let item of getItems()">
+              <li class="my-2">
+                <div class="flex justify-between">
+                  <div>
+                    <h2 class="font-medium text-normal sm:text-xl">{{ item.productName }}</h2>
+                    <p class="text-sm text-gray-400">Precio: {{ item.price }}$</p>
+                    <p class="text-sm text-gray-400">Cantidad: {{ item.quantity }}</p>
+                  </div>
+                  <div class="py-4">
+                    <div class="flex justify-between">
+                      <select id="stock-select" class="mr-4 border rounded-lg border-gray-200">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                      <h2 class="font-medium text-green-500 pt-2">{{ item.quantity * item.price }}$</h2>
+                    </div>
+                    <a href="" class="mt-4 pl-2 text-red-500">Eliminar</a>
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div> 
+          <ng-template #withoutProducts>
+            <p class="font-medium text-center text-xl">No hay productos disponibles :(</p>
+          </ng-template>
+        </ul>
+        
+        <br>
+        
+        <div class="flex justify-between">
+          <h3 class="border-gray-200 text-center sm:text-base sm:font-medium">Total: {{ getFinalPrice() }}$</h3>
+          <button type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+            Pagar
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+  
